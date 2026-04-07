@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan Your Event — Saladino Smoke Catering</title>
+  <meta name="description" content="Book Saladino Smoke for your next event. Real pit BBQ catering for parties of all sizes in West Michigan.">
+  <link rel="icon" href="https://images.squarespace-cdn.com/content/v1/65e9ec0d35d6534a8f3bba59/cfd60f82-cdaf-461b-9a9c-6333973d9037/favicon.ico">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="site-header">
+    <div class="header-content">
+      <div class="logo-text">Saladino Smoke</div>
+      <div class="logo-sub">Real Pit Barbecue &bull; Low &amp; Slow</div>
+    </div>
+  </header>
+
+  <!-- ═══ PROGRESS BAR ═══ -->
+  <nav class="progress-bar">
+    <div class="progress-steps">
+      <div class="progress-step active" data-step="1">
+        <span class="step-number">1</span>
+        <span class="step-label">Your Event</span>
+      </div>
+      <div class="step-connector" data-after="1"></div>
+      <div class="progress-step" data-step="2">
+        <span class="step-number">2</span>
+        <span class="step-label">Build Your Menu</span>
+      </div>
+      <div class="step-connector" data-after="2"></div>
+      <div class="progress-step" data-step="3">
+        <span class="step-number">3</span>
+        <span class="step-label">Lock It In</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══ MAIN ═══ -->
+  <main class="main-container">
+
+    <!-- ── STEP 1: Event Inquiry ── -->
+    <section class="step-panel active" id="step1">
+      <h1 class="section-title">Plan Your Next Event</h1>
+      <p class="section-subtitle">
+        Tell us about your event and we'll check if your date is available.
+        From 20 to 1,000+ guests, we've got you covered.
+      </p>
+
+      <div class="card" id="step1-form">
+        <!-- Rendered by app.js -->
+      </div>
+
+      <div style="text-align:center">
+        <button class="btn btn-primary btn-lg" id="btnCheckAvailability">
+          Check Availability
+        </button>
+      </div>
+
+      <div class="availability-result" id="availabilityResult">
+        <!-- Rendered by app.js after date check -->
+      </div>
+    </section>
+
+    <!-- ── STEP 2: Menu Builder ── -->
+    <section class="step-panel" id="step2">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+        <div>
+          <h1 class="section-title">Build Your Menu</h1>
+          <p class="section-subtitle" style="margin-bottom:0">
+            Select your package, meats, sides, and any extras.
+          </p>
+        </div>
+        <button class="btn btn-secondary" id="btnBackToInquiry">Back</button>
+      </div>
+
+      <div id="step2-content">
+        <!-- Rendered by app.js -->
+      </div>
+
+      <div class="btn-group" style="justify-content:center; margin-top:2rem;">
+        <button class="btn btn-secondary" id="btnBackToInquiry2" onclick="document.querySelector('#btnBackToInquiry').click()">Back to Event Details</button>
+        <button class="btn btn-primary btn-lg" id="btnToReview">Continue to Review &amp; Book</button>
+      </div>
+    </section>
+
+    <!-- ── STEP 3: Review & Book ── -->
+    <section class="step-panel" id="step3">
+      <h1 class="section-title">Review &amp; Book Your Event</h1>
+      <p class="section-subtitle">
+        Review your selections below, sign the agreement, and pay the $100 deposit to lock in your date.
+      </p>
+
+      <div id="step3-content">
+        <!-- Rendered by app.js -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="https://www.saladinosmoke.com" target="_blank">SaladinoSmoke.com</a>
+      <a href="https://facebook.com/saladino.smoke" target="_blank">Facebook</a>
+      <a href="https://instagram.com/saladinosmoke" target="_blank">Instagram</a>
+    </div>
+    <p>&copy; 2026 Saladino Smoke LLC &bull; Alto, Michigan</p>
+    <p style="margin-top:0.25rem;">(616) 437-4488 &bull; Saladinosmoke@gmail.com</p>
+  </footer>
+
+  <!-- ═══ SCRIPTS ═══ -->
+  <script src="menu-data.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>

@@ -6,14 +6,12 @@
 (function () {
   'use strict';
 
-  // ── Config (set these before deploying) ─────────────────────
+  // ── Config ──────────────────────────────────────────────────
   const CONFIG = {
-    // Google Apps Script web app URL (handles date check + booking submission)
-    BACKEND_URL: '',
-    // Stripe publishable key (for $100 deposit)
-    STRIPE_PK: '',
-    // Set to true to skip backend calls during development
-    DEV_MODE: true
+    // Google Apps Script web app URL — paste your deployment URL here after deploying Code.gs
+    BACKEND_URL: 'PASTE_YOUR_APPS_SCRIPT_DEPLOYMENT_URL_HERE',
+    // Dev mode: set to true to skip backend calls during testing
+    DEV_MODE: false
   };
 
   // ── State ───────────────────────────────────────────────────
@@ -1233,9 +1231,9 @@
       .then(r => r.json())
       .then(data => {
         if (data.success) {
-          if (data.stripeUrl) {
-            // Redirect to Stripe checkout for $100 deposit
-            window.location.href = data.stripeUrl;
+          if (data.paymentUrl) {
+            // Redirect to QuickBooks invoice for $100 deposit
+            window.location.href = data.paymentUrl;
           } else {
             showConfirmation(bookingData);
           }

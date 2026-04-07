@@ -9,7 +9,7 @@
   // ── Config ──────────────────────────────────────────────────
   const CONFIG = {
     // Google Apps Script web app URL — paste your deployment URL here after deploying Code.gs
-    BACKEND_URL: 'PASTE_YOUR_APPS_SCRIPT_DEPLOYMENT_URL_HERE',
+    BACKEND_URL: 'https://script.google.com/macros/s/AKfycbweyCJLnz8NApQu8xgJzEMUbG5xR754dUQmp25Xsj6a-NQs7_96yJpnkeLxJ2Vg9yc/exec',
     // Dev mode: set to true to skip backend calls during testing
     DEV_MODE: false
   };

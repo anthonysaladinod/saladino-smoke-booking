@@ -34,7 +34,7 @@
 // ═══ CONFIGURATION — FILL THESE IN ═══════════════════════════════════════════
 
 const CALENDAR_ID      = 'primary';               // Paste your catering calendar ID here
-const SHEET_ID         = '';                       // Paste the ID from createBookingSpreadsheet()
+const SHEET_ID         = '1UE1HirYoAuft5ABLqmkFRnZwAw0Dje8izuwfGo6tzOI';
 const SHEET_NAME       = 'Saladino Smoke \u2014 Booking Dashboard'; // Sheet tab name
 const NOTIFICATION_EMAIL  = 'catering@saladinosmoke.com';
 const CUSTOMER_FROM_NAME  = 'Saladino Smoke Catering';

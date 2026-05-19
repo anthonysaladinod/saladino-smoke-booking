@@ -38,6 +38,8 @@ const SHEET_ID         = '1UE1HirYoAuft5ABLqmkFRnZwAw0Dje8izuwfGo6tzOI';
 const SHEET_NAME       = 'Saladino Smoke \u2014 Booking Dashboard'; // Sheet tab name
 const NOTIFICATION_EMAIL  = 'catering@saladinosmoke.com';
 const CUSTOMER_FROM_NAME  = 'Saladino Smoke Catering';
+const CUSTOMER_FROM_EMAIL = 'info@saladinosmoke.com';     // Resend-verified sender (saladinosmoke.com DKIM verified 2026-05-19)
+const CUSTOMER_REPLY_TO   = 'catering@saladinosmoke.com'; // replies route to the human inbox
 
 // QuickBooks Online credentials
 const QBO_CLIENT_ID    = '';                       // From developer.intuit.com
@@ -379,11 +381,60 @@ function sendCustomerConfirmation(data, bookingId) {
 </div>
   `;
 
-  GmailApp.sendEmail(data.email, subject, '', {
-    htmlBody: htmlBody,
-    name: CUSTOMER_FROM_NAME,
-    replyTo: NOTIFICATION_EMAIL
+  sendViaResend({
+    from: CUSTOMER_FROM_NAME + ' <' + CUSTOMER_FROM_EMAIL + '>',
+    to: data.email,
+    replyTo: CUSTOMER_REPLY_TO,
+    subject: subject,
+    html: htmlBody
   });
+}
+
+// ═══ RESEND TRANSPORT ════════════════════════════════════════════════════════
+//
+// Why Resend instead of GmailApp:
+//   - DKIM-signed by Resend on saladinosmoke.com (verified 2026-05-19)
+//   - Doesn't burn Gmail's 100/day Apps Script quota
+//   - Real delivery / bounce / open tracking in the Resend dashboard
+//   - No "via gmail.com" footer
+//
+// Setup (one-time):
+//   Project Settings (gear icon) > Script Properties > Add property:
+//     RESEND_API_KEY = re_...   (from resend.com/api-keys)
+
+function sendViaResend(opts) {
+  const key = PropertiesService.getScriptProperties().getProperty('RESEND_API_KEY');
+  if (!key) {
+    Logger.log('RESEND_API_KEY missing — falling back to GmailApp');
+    GmailApp.sendEmail(opts.to, opts.subject, '', {
+      htmlBody: opts.html,
+      name: CUSTOMER_FROM_NAME,
+      replyTo: opts.replyTo
+    });
+    return;
+  }
+
+  const payload = {
+    from: opts.from,
+    to: [opts.to],
+    subject: opts.subject,
+    html: opts.html,
+    reply_to: opts.replyTo
+  };
+
+  const response = UrlFetchApp.fetch('https://api.resend.com/emails', {
+    method: 'post',
+    contentType: 'application/json',
+    headers: { 'Authorization': 'Bearer ' + key },
+    payload: JSON.stringify(payload),
+    muteHttpExceptions: true
+  });
+
+  const code = response.getResponseCode();
+  if (code >= 300) {
+    Logger.log('Resend send failed (' + code + '): ' + response.getContentText());
+    throw new Error('Resend send failed: ' + code);
+  }
 }
 
 // ═══ QUICKBOOKS ONLINE ═══════════════════════════════════════════════════════
